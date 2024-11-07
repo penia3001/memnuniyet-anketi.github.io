@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QNBBANK Memnuniyet Anketi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 60%;
+            min-width: 320px;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #003366;
+            margin: 20px 0;
+        }
+
+        .logo {
+            width: 180px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input[type="text"], select, input[type="radio"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #003366;
+            color: #fff;
+            font-size: 18px;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #005599;
+        }
+
+        .result-message {
+            padding: 20px;
+            background-color: #e9f7fe;
+            color: #003366;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .result-message h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .result-message p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .footer {
+            font-size: 14px;
+            color: #888;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/QNB_logo.svg" alt="QNBBANK Logo" class="logo">
+        <h1>QNBBANK Memnuniyet Anketi</h1>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label for="name">Adınız:</label>
+                <input type="text" id="name" name="name" required placeholder="Adınızı girin">
+            </div>
+
+            <div class="form-group">
+                <label for="serviceQuality">Müşteri temsilcisinin hizmet kalitesini nasıl değerlendirirsiniz?</label>
+                <select id="serviceQuality" name="serviceQuality" required>
+                    <option value="çok_iyi">Çok İyi</option>
+                    <option value="iyi">İyi</option>
+                    <option value="orta">Orta</option>
+                    <option value="kötü">Kötü</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Sorununuzun çözülme süresi hakkında ne düşünüyorsunuz?</label><br>
+                <input type="radio" id="quick" name="problemResolution" value="hızlı" required>
+                <label for="quick">Hızlı</label>
+                <input type="radio" id="medium" name="problemResolution" value="orta">
+                <label for="medium">Orta</label>
+                <input type="radio" id="slow" name="problemResolution" value="yavaş">
+                <label for="slow">Yavaş</label>
+            </div>
+
+            <div class="form-group">
+                <label>Müşteri temsilcisini başkalarına tavsiye eder misiniz?</label><br>
+                <input type="radio" id="yes" name="recommendation" value="Evet" required>
+                <label for="yes">Evet</label>
+                <input type="radio" id="no" name="recommendation" value="Hayır">
+                <label for="no">Hayır</label>
+            </div>
+
+            <button type="submit">Gönder</button>
+        </form>
+
+        <div id="resultMessage" class="result-message"></div>
+        
+        <div class="footer">
+            <p>QNBBANK - Müşteri Memnuniyeti</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const serviceQuality = document.getElementById('serviceQuality').value;
+            const problemResolution = document.querySelector('input[name="problemResolution"]:checked')?.value;
+            const recommendation = document.querySelector('input[name="recommendation"]:checked')?.value;
+
+            const resultMessage = `
+                <h2>Teşekkürler, ${name}!</h2>
+                <p><strong>Hizmet Kalitesi:</strong> ${serviceQuality}</p>
+                <p><strong>Sorun Çözülme Süresi:</strong> ${problemResolution}</p>
+                <p><strong>Tavsiye Ediyor Musunuz?:</strong> ${recommendation}</p>
+            `;
+
+            document.getElementById('resultMessage').innerHTML = resultMessage;
+        });
+    </script>
+
+</body>
+</html>
